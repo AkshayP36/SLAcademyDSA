@@ -1,0 +1,22 @@
+Pattern Name:
+
+Prefix Sum
+
+Trigger Words:
+range sum
+subarray sum
+multiple queries
+sum between indices
+frequency of range
+count in range
+Mental Question:
+
+Ask:
+
+"Am I repeatedly asking about a range in the same array?"
+
+If yes:
+
+Think:
+
+Precompute → Prefix Array → Answer in O(1)
