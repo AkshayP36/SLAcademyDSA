@@ -1,0 +1,43 @@
+Pattern Name
+
+Last Occurrence Tracking
+
+(related to Sliding Window)
+
+Trigger Words
+
+When you see:
+
+minimum length subarray
+smallest window
+contains all required elements
+closest occurrence
+between two values
+
+Think:
+
+Track positions
+Mental Template
+
+Ask:
+
+"Do I only need the distance between important elements?"
+
+If yes:
+
+Store:
+
+lastIndex[element]
+
+and calculate:
+
+currentIndex - previousIndex + 1
+Similar Problems
+Minimum window substring
+Longest substring without repeating characters
+Smallest range covering elements
+Longest subarray with constraints
+Find shortest segment containing all values
+Distance between repeated values
+
+For this specific problem, the strongest recognition keyword is:
