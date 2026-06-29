@@ -46,5 +46,23 @@ Explanation 2:
  So we will return these two elements i.e [5, 4], we can also any other ordering.
  */
 
+import java.util.ArrayList;
+
 public class Q8_LeadersInAnArray {
+
+    public ArrayList<Integer> solve(ArrayList<Integer> A) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        int currentMax = A.get(A.size()-1);
+        ans.add(currentMax);
+
+        for(int i=A.size()-2; i>=0; i--){
+            if(A.get(i)>currentMax){
+                currentMax = A.get(i);
+                ans.add(A.get(i));
+            }
+        }
+
+        return ans;
+
+    }
 }
