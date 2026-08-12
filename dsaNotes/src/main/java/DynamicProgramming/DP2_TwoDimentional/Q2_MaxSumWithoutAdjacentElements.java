@@ -84,3 +84,39 @@ public class Q2_MaxSumWithoutAdjacentElements {
     }
 
 }
+
+
+
+
+
+
+/*
+The trick: shrink the problem first
+
+Look at any column of the grid. Its two numbers sit right on top of each other — that's "vertically adjacent." So you can never pick both numbers from the same column. That means each column really only offers you one usable number: whichever of the two is bigger (why would you ever pick the smaller one if you're only allowed one?).
+
+So step one: squash the grid into a single row, B[i] = max(A[0][i], A[1][i]).
+
+Now here's the second piece of the rule: picking a number also blocks its diagonal neighbors, not just the one directly next to it. If you pick something in column i, that automatically rules out both cells of column i+1 (straight side-neighbor for one row, diagonal-neighbor for the other) and both cells of column i-1. So once you collapse to one number per column, the rule simplifies beautifully to:
+
+Pick numbers from a line, but never pick two numbers that are next to each other.
+
+That's the classic "House Robber" problem — you're a kid raiding a row of cookie jars, and you can't take from two jars sitting side by side, or the guard next door hears you.
+
+Thinking recursively (like a child deciding jar by jar)
+
+Stand at column col and ask yourself just one question: "Do I take this jar, or skip it?"
+
+Skip it → move on to col+1, nothing gained here.
+Take it → grab B[col], but now col+1 is forbidden too, so jump straight to col+2.
+
+Whichever choice gives more cookies wins:
+
+solve(col) = max( solve(col+1), B[col] + solve(col+2) )
+
+You keep asking this same question at every column, all the way until you run off the end of the row — at that point there's nothing left to grab, so solve(col) = 0 when col >= N.
+
+Why memoize?
+
+Look at the tree in the diagram: solve(2) gets asked for by two different paths — once from solve(0)'s "skip" branch (via solve(1)), and once from solve(0)'s "take" branch directly. Without memoization, you'd solve solve(2) (and everything below it) twice. With N up to 20,000, that doubling cascades into an exponential mess. So the first time you compute solve(col), you write the answer down in a memo table; every future time you're asked the same question, you just read the answer instead of recomputing.
+ */
