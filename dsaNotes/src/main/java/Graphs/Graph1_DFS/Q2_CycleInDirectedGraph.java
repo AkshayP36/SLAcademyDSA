@@ -1,4 +1,4 @@
-package Graphs;
+package Graphs.Graph1_DFS;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package Graphs;
+package Graphs.Graph1_DFS;
 
 /*
 Problem Description
