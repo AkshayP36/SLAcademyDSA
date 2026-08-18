@@ -1,5 +1,8 @@
 package Graphs.Graph2_BFS;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+
 /*
 Problem Description
 Given a matrix of integers A of size N x M describing a maze. The maze consists of empty locations and walls.
@@ -54,5 +57,61 @@ Explanation 2:
  */
 public class Q4_ShortestDistanceinAMaze {
 
+    public class Pair{
+        private int x;
+        private int y;
+        Pair(int x, int y){
+            this.x = x;
+            this.y = y;
+        }
+    }
+    public int solve(int[][] maze, int[] source, int[] destination) {
+        int source_x = source[0];
+        int source_y = source[1];
+        int destination_x = destination[0];
+        int destination_y = destination[1];
+        int[][] directions = {{-1,0},{0,-1},{1,0},{0,1}};//TLDR
 
+        int[][] storage = new int[maze.length][maze[0].length];
+        for(int i=0;i<storage.length;i++){
+            for(int j=0;j<storage[0].length;j++){
+                storage[i][j] = Integer.MAX_VALUE;
+            }
+        }
+
+        Queue<Pair> queue = new ArrayDeque<>();
+        queue.add(new Pair(source_x, source_y));
+        storage[source_x][source_y] = 0;
+
+        while(queue.size()>0){
+            Pair temp = queue.remove();
+
+            for(int i=0;i<4;i++){ //to travel entire direction array
+                int current_x = temp.x + directions[i][0];
+                int current_y = temp.y + directions[i][1];
+
+                int count=0; //to add count how many cells we travel
+                while(current_x>=0 && current_x<maze.length && current_y>=0 && current_y<maze[0].length && maze[current_x][current_y]==0){
+                    count++;
+                    current_x += directions[i][0];
+                    current_y += directions[i][1];
+                }
+
+                //adjusting after bounce back case
+                current_x -= directions[i][0];
+                current_y -= directions[i][1];
+
+                if(storage[temp.x][temp.y] + count < storage[current_x][current_y]){
+                    storage[current_x][current_y] = storage[temp.x][temp.y]+ count;
+                    queue.add(new Pair(current_x, current_y));
+                }
+            }
+        }
+
+
+
+        if(storage[destination_x][destination_y] == Integer.MAX_VALUE) return -1;
+        else
+            return storage[destination_x][destination_y];
+    }
 }
