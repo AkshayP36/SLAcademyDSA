@@ -52,4 +52,28 @@ Expected Output
 Provide sample input and click run to see the correct output for the provided input. Use this to improve your problem understanding and test edge cases
  */
 public class Q1_MaximumSubarrayEasy {
+
+    public int getSum(int i, int j, int[]C){
+        int sum = 0;
+        for(int start = i; start<=j; start++){
+            sum += C[start];
+        }
+        return sum;
+    }
+    public int maxSubarray(int A, int B, int[] C) {
+
+        int ans = 0;
+
+        for(int i=0;i<C.length; i++){
+            for(int j = i; j<C.length; j++){
+                int getSumFromSubarray = getSum(i,j,C);
+                int temp = Math.max(getSumFromSubarray, ans);
+                if(temp<=B){
+                    ans = temp;
+                }
+            }
+        }
+
+        return ans;
+    }
 }
